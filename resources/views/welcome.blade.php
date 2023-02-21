@@ -1,6 +1,14 @@
+<a href="register" > Register here </a>||<a href="login"> Login here </a>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        {{-- @if (Route::has('register'))
+    @auth
+        <a href="{{route ('register')}}">Register</a>
+    @endauth
+@endif --}}
+        
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -130,3 +138,4 @@
         </div>
     </body>
 </html>
+

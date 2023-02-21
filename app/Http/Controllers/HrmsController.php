@@ -3,17 +3,53 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HrmsController extends Controller
 {
     public function login(){
         return view("auth.login");
     }
+
+    // public function loginuser(Request $req){
+    //     $user = new User;
+    //     $user->name= $req->name;
+    //     $user->email= $req->email;
+
+    // }
+
+    // public function loginuser(Request $request){
+    // {
+    //     $request->validate([
+    //         'email' => 'required',
+    //         'password' => 'required',
+    //     ]);
+   
+        
+  
+    //     return redirect("login")->withSuccess('Login details are not valid');
+    // }
+
+    // }
+
+
+
+
     public function login2(){
         return view("auth.login2");
     }
     public function register(){
+        
         return view("auth.register");
+    }
+
+    public function adduser(Request $req){
+        $user= new User;
+        $user->name= $req->name;
+        $user->email= $req->email;
+        $user->password= $req->pass;
+         $user->save();
+        //return view("auth.register");
     }
     //400 error
     public function error(){
@@ -42,5 +78,17 @@ class HrmsController extends Controller
     //animation
     public function animation(){
         return view('auth.animation');
+    }
+    //weather
+    public function weather(){
+        return view('auth.weather');
+    }
+    //typography
+    public function typography(){
+        return view('auth.typography');
+    }
+    //timeline
+    public function timeline(){
+        return view('auth.timeline');
     }
 }

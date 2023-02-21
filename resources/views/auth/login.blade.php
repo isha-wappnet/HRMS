@@ -4,16 +4,16 @@
 <section id="wrapper" class="login-register">
   <div class="login-box">
       <div class="white-box">
-          <form class="form-horizontal form-material" id="loginform" action="index.html">
+          <form class="form-horizontal form-material" id="loginform" method="" >
               <h3 class="box-title m-b-20">Sign In</h3>
               <div class="form-group">
                   <div class="col-xs-12">
-                      <input class="form-control" type="text" required="" placeholder="Username" />
+                      <input class="form-control" type="text"id="name" name="name"  placeholder="Username" />
                   </div>
               </div>
               <div class="form-group">
                   <div class="col-xs-12">
-                      <input class="form-control" type="password" required="" placeholder="Password" />
+                      <input class="form-control" type="password" id="pass" name="pass" placeholder="Password" />
                   </div>
               </div>
               <div class="form-group">
@@ -85,4 +85,30 @@
 </section>
 
     
-@endsection
+<script>
+    $('#loginform').validate({
+      rules: {
+          name: {
+              required: true,
+          },
+          
+          pass: {
+              required: true,
+              
+          },
+         
+      },
+      messages: {
+        name: {
+              required: "Please Enter Name",
+          },
+         
+          pass: {
+              required: "Please enter password",
+          },
+          
+      },
+    })
+    </script>
+    @endsection
+
