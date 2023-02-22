@@ -1,20 +1,45 @@
 @extends('layouts.auth')
 
 @section('content')
-<section id="wrapper" class="login-register">
+
+  <section id="wrapper" class="login-register">
   <div class="login-box">
       <div class="white-box">
-          <form class="form-horizontal form-material" id="loginform" method="" >
-              <h3 class="box-title m-b-20">Sign In</h3>
+        @if (session('error'))
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">×</button>
+            {{ session('error') }}
+        </div>
+    @endif
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">×</button>
+            {{ session('success') }}
+        </div>
+    @endif
+          <form class="form-horizontal form-material" id="loginforms" method="POST" action="{{route('user')}}">
+              @csrf<h3 class="box-title m-b-20">Sign In</h3>
               <div class="form-group">
                   <div class="col-xs-12">
-                      <input class="form-control" type="text"id="name" name="name"  placeholder="Username" />
+                      <input class="form-control" type="text"id="name" name="email"  placeholder="email" />
+                      @error('email')
+                                    <span class="invalid-feedback text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                   </div>
               </div>
               <div class="form-group">
                   <div class="col-xs-12">
-                      <input class="form-control" type="password" id="pass" name="pass" placeholder="Password" />
-                  </div>
+                      <input class="form-control" type="password" id="password" name="password" placeholder="Password" />
+                      @error('password')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+                    </div>
               </div>
               <div class="form-group">
                   <div class="col-md-12">
@@ -86,24 +111,24 @@
 
     
 <script>
-    $('#loginform').validate({
+    $('#loginforms').validate({
       rules: {
-          name: {
+          email: {
               required: true,
           },
           
-          pass: {
+          password: {
               required: true,
               
           },
          
       },
       messages: {
-        name: {
-              required: "Please Enter Name",
+        email: {
+              required: "Please Enter valid email",
           },
          
-          pass: {
+          password: {
               required: "Please enter password",
           },
           

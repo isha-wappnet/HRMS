@@ -2,7 +2,8 @@
 
 @section('content')
 @include('layouts.header')
-  <!-- Page Content -->
+
+  {{-- <!-- Page Content --> 
   <div id="page-wrapper">
     <div class="container-fluid">
       <div class="row bg-title">
@@ -395,6 +396,6 @@
 </div>
 <!-- /#wrapper -->
 
-</body>
+</body> --}}
 @endsection
 @include('layouts.footer')

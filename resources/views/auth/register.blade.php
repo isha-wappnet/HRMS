@@ -2,11 +2,6 @@
 
 @section('content')
 
-
-  {{-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> --}}
-
 <section id="wrapper" class="login-register">
   <div class="login-box">
     <div class="white-box">
@@ -25,12 +20,12 @@
         </div>
         <div class="form-group ">
           <div class="col-xs-12">
-            <input class="form-control" type="password"  placeholder="Password" id="pass" name="pass">
+            <input class="form-control" type="password"  placeholder="Password" id="password" name="password">
           </div>
         </div>
         <div class="form-group">
           <div class="col-xs-12">
-            <input class="form-control" type="password"  placeholder="Confirm Password" id="cpass" name="cpass">
+            <input class="form-control" type="password"  placeholder="Confirm Password" id="cpassword" name="cpassword">
           </div>
         </div>
         <div class="form-group">
@@ -66,13 +61,13 @@
         email: {
             required: true,
         },
-        pass: {
+        password: {
             required: true,
             
         },
-        cpass: {
+        cpassword: {
             required: true,
-            equalTo:'[name="pass"]',
+            equalTo:'[name="password"]',
         },
     },
     messages: {
@@ -80,12 +75,12 @@
             required: "Please Enter Name",
         },
         email: {            
-            email: "Please enter valid email id",
+            required: "Please enter valid email id",
         },
-        pass: {
+        password: {
             required: "Please enter password",
         },
-        cpass: {
+        cpassword: {
             required: "Confirm password is required",
             
         },

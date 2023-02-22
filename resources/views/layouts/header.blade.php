@@ -1,3 +1,5 @@
+
+
 <div id="wrapper">
     <!-- Top Navigation -->
     <nav class="navbar navbar-default navbar-static-top m-b-0">
@@ -185,7 +187,7 @@
                   <li role="separator" class="divider"></li>
                   <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="login.html"><i class="fa fa-power-off"></i> Logout</a></li>
+                  <li><a href="login"><i class="fa fa-power-off"></i> Logout</a></li>
                 </ul>
           </div>
         </div>
