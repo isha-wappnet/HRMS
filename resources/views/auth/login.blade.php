@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-
+<title>Login page</title>
   <section id="wrapper" class="login-register">
   <div class="login-box">
       <div class="white-box">
@@ -20,7 +20,8 @@
         </div>
     @endif
           <form class="form-horizontal form-material" id="loginforms" method="POST" action="{{route('user')}}">
-              @csrf<h3 class="box-title m-b-20">Sign In</h3>
+              @csrf
+              <h3 class="box-title m-b-20">Sign In</h3>
               <div class="form-group">
                   <div class="col-xs-12">
                       <input class="form-control" type="text"id="name" name="email"  placeholder="email" />
@@ -47,7 +48,7 @@
                           <input id="checkbox-signup" type="checkbox" />
                           <label for="checkbox-signup"> Remember me </label>
                       </div>
-                      <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i
+                      <a href="{{route('forgotpassword')}}" id="to-recover" class="text-dark pull-right"><i
                               class="fa fa-lock m-r-5"></i> Forgot pwd?</a>
                   </div>
               </div>
@@ -81,7 +82,7 @@
                       </p>
                   </div>
               </div>
-          </form>
+          {{-- </form>
           <form class="form-horizontal" id="recoverform" action="index.html">
               <div class="form-group">
                   <div class="col-xs-12">
@@ -104,7 +105,7 @@
                       </button>
                   </div>
               </div>
-          </form>
+          </form> --}}
       </div>
   </div>
 </section>

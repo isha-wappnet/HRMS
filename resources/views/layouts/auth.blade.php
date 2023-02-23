@@ -8,7 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png" />
-    <title>Elite Admin - is a responsive admin template</title>
+    {{-- <title>Elite Admin - is a responsive admin template</title> --}}
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>

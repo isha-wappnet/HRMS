@@ -1,9 +1,12 @@
 <?php
 
+
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ForgotpasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,3 +60,9 @@ use App\Http\Controllers\LogoutController;
          Route::get('weather',[LoginController::class,"weather"]);
 
          Route::get('logout',[LogoutController::class,"perform"]);
+
+         Route::get('forgotpassword',[ForgotpasswordController::class,"forgotPassword"])->name('forgotPassword');
+
+         Route::post('forgotPasswordValidate',[ForgotpasswordController::class,'forgotPasswordValidate'])->name('forgotPasswordValidate');
+
+         Route::get('resetpassword/{token}',[ForgotpasswordController::class,"resetpassword"])->name('resetpassword');
