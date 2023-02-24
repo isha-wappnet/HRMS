@@ -1,14 +1,35 @@
-<form class="form-horizontal form-material"  method="POST" action="{{route('resetpassword')}}">
+ @extends('layouts.auth')
+
+@section('content')
+
+@if (session('error'))
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">×</button>
+            {{ session('error') }}
+        </div>
+    @endif
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">×</button>
+            {{ session('success') }}
+        </div>
+    @endif
+<center>
+<form class="form-horizontal form-material" id="resetpassword" method="POST" action="{{route('submit', ['token' => $token])}}">
     @csrf
-    <h3 class="box-title m-b-20">Sign In</h3>
+    <h3 class="box-title m-b-20">Reset password</h3>
     <div class="form-group">
         <div class="col-xs-12">
-            <input class="form-control" type="password" id="password" name="password"  placeholder="password" />
+
+            <input class="form-control" type="text"id="name" name="email"  placeholder="email" />
+            <input class="form-control" type="password" id="password" name="password"  placeholder="Enter new password" />
                 </div>
     </div>
     <div class="form-group">
         <div class="col-xs-12">
-            <input class="form-control" type="password" id="cpassword" name="cpassword" placeholder="cPassword" />
+            <input class="form-control" type="password" id="cpassword" name="cpassword" placeholder="Enter confirm Password" />
             
           </div>
     </div>
@@ -16,3 +37,39 @@
                           type="submit">
                        Update password
                       </button>
+    </form>               
+ </center>
+
+        <script>
+         $('#resetpassword').validate({
+        rules: {
+            email: {
+              required: true,
+          },
+        
+            password: {
+                required: true,
+
+            },
+        
+                cpassword: {
+                required: true,
+                equalTo:'[name="password"]',
+            },
+        },
+        messages: {
+            
+            email: {
+              required: "Please Enter valid email",
+          },
+            password: {
+                required: "Please enter password",
+            },
+            cpassword: {
+                required: "Confirm password is required",
+                
+            },
+        },
+        })
+    </script>    
+     @endsection

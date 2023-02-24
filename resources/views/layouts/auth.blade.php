@@ -55,9 +55,9 @@
 
 <body>
     <!-- Preloader -->
-    <div class="preloader">
+    {{-- <div class="preloader">
         <div class="cssload-speeding-wheel"></div>
-    </div>
+    </div> --}}
     @yield('content')
     <!-- jQuery -->
     <script src="{{ asset('assets/bower_components/jquery/dist/jquery.min.js') }}"></script>

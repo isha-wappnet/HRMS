@@ -186,8 +186,10 @@
                   <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
+                  <li><a href="#"><i class="fa fa-power-off"></i> Change Password</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a href="login"><i class="fa fa-power-off"></i> Logout</a></li>
+                  
                 </ul>
           </div>
         </div>

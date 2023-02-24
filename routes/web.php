@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+
 use App\Http\Controllers\ForgotpasswordController;
 
 /*
@@ -50,6 +51,12 @@ use App\Http\Controllers\ForgotpasswordController;
              return view('welcome');
          });
 
+        //  Route::get('/resetpassword', function () {
+        //     return view('auth.resetpassword');
+        // });
+
+
+
         Route::get('register',[RegisterController::class,"show"]);
         Route::post('register',[RegisterController::class,"register"]);
 
@@ -61,8 +68,22 @@ use App\Http\Controllers\ForgotpasswordController;
 
          Route::get('logout',[LogoutController::class,"perform"]);
 
-         Route::get('forgotpassword',[ForgotpasswordController::class,"forgotPassword"])->name('forgotPassword');
+         Route::get('forgotpassword',[ForgotpasswordController::class,"forgotPassword"])->name('forgotpassword');
 
          Route::post('forgotPasswordValidate',[ForgotpasswordController::class,'forgotPasswordValidate'])->name('forgotPasswordValidate');
 
-         Route::get('resetpassword/{token}',[ForgotpasswordController::class,"resetpassword"])->name('resetpassword');
+
+
+
+//route for opening reset page after getting link in mail
+
+         Route::get('/resetpassword/{token}',[ForgotpasswordController::class,"resetpassword"])->name('resetpassword');
+         
+//route to reset password------------------------------------------------
+
+            Route::post('reset',[ForgotpasswordController::class,"submitresetpassword"])->name('submit');
+
+    //route to view change password page
+
+    Route::get('changepassword',[ForgotpasswordController::class,"changepassword"]);
+    
