@@ -97,13 +97,13 @@ button[disabled] {
   <div class="container-fluid">
     <div class="row bg-title">
       <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h4 class="page-title">Change password Page</h4>
+        <h4 class="page-title">User Profile Page</h4>
       </div>
       <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
         <a href="https://themeforest.net/item/elite-admin-responsive-dashboard-web-app-kit-/16750820" target="_blank" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Buy Now</a>
         <ol class="breadcrumb">
           <li><a href="#">Dashboard</a></li>
-          <li class="active">Change password Page</li>
+          <li class="active">User Profile Page</li>
         </ol>
       </div>
       <!-- /.col-lg-12 -->
@@ -125,38 +125,32 @@ button[disabled] {
     </div>
 @endif
   <div class="cardStyle">
-    <form action="{{route('change')}}" method="post" name="changepassword" id="changepassword">
+    <form action="{{route('update')}}" method="post" name="userprofile" id="userprofile">
        <h2 class="formTitle">
-        Change Password
+        Update Profile
       </h2>
       @csrf
       <div class="inputDiv">
-        <label>Current Password</label>
-        <input type="password" id="currentpassword" name="currentpassword">
-        @error('currentpassword')
+        <label>New name</label>
+        <input type="text" id="name" name="name"  value="{{Auth::user()->name}}">
+        @error('new_name')
         <span class="text-danger">{{ $message }}</span>
     @enderror
       </div>
 
     <div class="inputDiv">
-      <label >New Password</label>
-      <input type="password" id="new_password" name="new_password" >
-      @error('new_password')
+      <label >New Email</label>
+      <input type="email" id="email" name="email"   value="{{Auth::user()->email}}">
+      @error('new_email')
       <span class="text-danger">{{ $message }}</span>
   @enderror
     </div>
       
-    <div class="inputDiv">
-      <label >Confirm Password</label>
-      <input type="password" id="confirmPassword" name="confirmPassword">
-      @error('confirmPassword')
-      <span class="text-danger">{{ $message }}</span>
-  @enderror
-    </div>
+   
     
     <div class="buttonWrapper">
       <button type="submit" class="submitButton pure-button pure-button-primary">
-        <span>Continue</span>
+        <span>Update Profile</span>
        
       </button>
     </div>
@@ -166,33 +160,27 @@ button[disabled] {
 </div>
 <script>
 
-$('#changepassword').validate({
+$('#userprofile').validate({
     rules: {
         
-        currentpassword: {
+        name: {
             required: true,
         },
-        new_password: {
+        email: {
             required: true,
             
         },
-        confirmPassword: {
-            required: true,
-            equalTo:'[name="new_password"]',
-        },
+        
     },
     messages: {
       
-        currentpassword: {            
-            required: "Please enter valid current password",
+        name: {            
+            required: "Please enter new name",
         },
-        new_password: {
-            required: "Please enter password",
+        email: {
+            required: "Please enter new email",
         },
-        confirmPassword: {
-            required: "Confirm password is required",
-            
-        },
+        
     },
   })
 

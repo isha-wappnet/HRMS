@@ -8,8 +8,8 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
-    public function weather(){
-        return view('auth.weather');
+    public function dashboard(){
+        return view('auth.dashboard');
     }
 
 
@@ -32,8 +32,8 @@ class LoginController extends Controller
             return redirect()->to('login')
                 ->with('error','invalid data');
         else{
-            return view('auth.weather')
-            ->with('success','auth.weather');
+            return view('auth.dashboard')
+            ->with('success','auth.dashboard');
         }
         
 

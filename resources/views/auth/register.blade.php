@@ -1,7 +1,20 @@
 @extends('layouts.auth')
 
 @section('content')
-
+@if (session('error'))
+<div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert"
+        aria-hidden="true">×</button>
+    {{ session('error') }}
+</div>
+@endif
+@if (session('success'))
+<div class="alert alert-success alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert"
+        aria-hidden="true">×</button>
+    {{ session('success') }}
+</div>
+@endif
 <section id="wrapper" class="login-register">
   <div class="login-box">
     <div class="white-box">
@@ -11,21 +24,33 @@
         <div class="form-group ">
           <div class="col-xs-12">
             <input class="form-control" type="text" placeholder="Name" id="name" name="name">
+            @error('name')
+      <span class="text-danger">{{ $message }}</span>
+  @enderror
           </div>
         </div>
         <div class="form-group ">
           <div class="col-xs-12">
             <input class="form-control" type="text" placeholder="Email" id="email" name="email">
+            @error('email')
+      <span class="text-danger">{{ $message }}</span>
+  @enderror
           </div>
         </div>
         <div class="form-group ">
           <div class="col-xs-12">
             <input class="form-control" type="password"  placeholder="Password" id="password" name="password">
+            @error('password')
+      <span class="text-danger">{{ $message }}</span>
+  @enderror
           </div>
         </div>
         <div class="form-group">
           <div class="col-xs-12">
             <input class="form-control" type="password"  placeholder="Confirm Password" id="cpassword" name="cpassword">
+            @error('cpassword')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
           </div>
         </div>
         <div class="form-group">

@@ -42,9 +42,9 @@ use App\Http\Controllers\ForgotpasswordController;
 // Route::get('typography',[HrmsController::class,"typography"]);
 // Route::get('timeline',[HrmsController::class,"timeline"]);
 
-// // Route::get('/r', function () {
-// //     return view('register');
-// // });
+// Route::get('/dashboard', function () {
+//     return view('auth.dashboard');
+// });
 
 
          Route::get('/', function () {
@@ -58,13 +58,14 @@ use App\Http\Controllers\ForgotpasswordController;
 
 
         Route::get('register',[RegisterController::class,"show"]);
+
         Route::post('register',[RegisterController::class,"register"]);
 
         Route::get('login',[LoginController::class,"show"]);
 
-        Route::post('weather',[LoginController::class,"login"])->name('user');
+        Route::post('dashboard',[LoginController::class,"login"])->name('user');
        
-         Route::get('weather',[LoginController::class,"weather"]);
+         Route::get('dashboard',[LoginController::class,"dashboard"]);
 
          Route::get('logout',[LogoutController::class,"perform"]);
 
@@ -87,3 +88,9 @@ use App\Http\Controllers\ForgotpasswordController;
 
     Route::get('changepassword',[ForgotpasswordController::class,"changepassword"]);
     
+    Route::POST('changepassword',[ForgotpasswordController::class,"submitchangepassword"])->name('change');
+    
+
+    Route::get('userprofile',[ForgotpasswordController::class,"userprofile"]);
+
+    Route::post('userprofile',[ForgotpasswordController::class,"profileUpdate"])->name('update');
