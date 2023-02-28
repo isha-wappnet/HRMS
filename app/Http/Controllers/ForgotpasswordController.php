@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use DataTables;
 
 class ForgotpasswordController extends Controller
 {
@@ -23,31 +24,31 @@ class ForgotpasswordController extends Controller
 
     public function forgotPasswordValidate(Request $req)
     {
-        $valid =$req->validate([
-            'email'=> 'required|email|exists:users',
+        $valid = $req->validate([
+            'email' => 'required|email|exists:users',
         ]);
         // dd($valid);
         $token = Str::random(64);
-       
+
         DB::table('password_resets')->insert([
-            'email'=>  $req->email,
-            'token'=> $token,
-            'created_at'=> Carbon::now()
-        
+            'email' =>  $req->email,
+            'token' => $token,
+            'created_at' => Carbon::now()
+
 
         ]);
 
-        Mail::send('mailforgot',['token'=> $token],function($message) use($req){
+        Mail::send('mailforgot', ['token' => $token], function ($message) use ($req) {
 
 
             $message->to($req->email);
-            $message-> subject('Reset password');
+            $message->subject('Reset password');
         });
-        return back()->with('success','Rest link send to your registered mail address!');
-        
+        return back()->with('success', 'Rest link send to your registered mail address!');
     }
-    public function resetpassword($token){
-        return view('auth.resetpassword',['token'=>$token]);
+    public function resetpassword($token)
+    {
+        return view('auth.resetpassword', ['token' => $token]);
     }
 
     //reset password ----------------------------------------------------------------------------------//
@@ -55,64 +56,42 @@ class ForgotpasswordController extends Controller
     public function submitresetpassword(Request $request)
     {
         $request->validate([
-            'email'=>'required|email|exists:users',
+            'email' => 'required|email|exists:users',
             'password' => 'required|min:8',
             'cpassword' => 'required|same:password'
         ]);
 
         $updatepassword = DB::table('password_resets')->where([
 
-            'email'=> $request->email,
-            'token'=> $request->token
+            'email' => $request->email,
+            'token' => $request->token
         ])
-        ->first();
+            ->first();
 
-        if(! $updatepassword){
+        if (!$updatepassword) {
 
-            return back()->withInput()->with('error','Reset link is expired!');
-
+            return back()->withInput()->with('error', 'Reset link is expired!');
         }
-            $user  = User::where('email', $request->email)
-            ->update(['password'=>Hash::make($request->password)]);
+        $user  = User::where('email', $request->email)
+            ->update(['password' => Hash::make($request->password)]);
 
-            DB::table('password_resets')->where(['email'=>$request->email])->delete();
-            return redirect('login')->with('Success','your password has been successfully changed');
+        DB::table('password_resets')->where(['email' => $request->email])->delete();
+        return redirect('login')->with('Success', 'your password has been successfully changed');
     }
-//---------------------------------------------------------------------------------------------------------------------------------------------
-      
-
-        public function changepassword(){
-            
-            return view('auth.changepassword');
-        }
-        //change password function
-
-        public function submitchangepassword(Request $request){
-
-        //     $validateData=$request->validate([
-
-        //         'currentpassword' => 'required',
-        //         'password' =>'required'
-        //     ]);
+    //---------------------------------------------------------------------------------------------------------------------------------------------
 
 
-        //   $hashedpassword =Auth::user()->password;
-        //     if(Hash::check($request->currentpassword,$hashedpassword)){
+    public function changepassword()
+    {
 
-        //     $user= User::find(Auth::id());
-        //     $user->password = Hash::make($request->input('password'));
-        //     $user->save();
-        //     Auth::logout();
-       
-        //     return redirect('login')->with('success','Password Updated Successfully');
+        return view('auth.changepassword');
+    }
+    //change password function
 
-        // }
-        // else{
+    public function submitchangepassword(Request $request)
+    {
 
-        //     return redirect()->back()->with('error','Current Password does not match with Old Password');
-        // }
 
-        // }
         $request->validate([
             'currentpassword' => 'required',
             'new_password' => 'required',
@@ -120,7 +99,7 @@ class ForgotpasswordController extends Controller
 
 
         #Match The Old Password
-        if(!Hash::check($request->currentpassword, auth()->user()->password)){
+        if (!Hash::check($request->currentpassword, auth()->user()->password)) {
             return back()->with("error", "Old Password Doesn't match!");
         }
 
@@ -130,33 +109,68 @@ class ForgotpasswordController extends Controller
             'password' => Hash::make($request->new_password)
         ]);
 
-        return redirect('login')->with('success','Password Updated Successfully');
-}
+        return redirect('login')->with('success', 'Password Updated Successfully');
+    }
 
 
 
 
-        public function userprofile(){
+    public function userprofile()
+    {
 
-            return view('auth.userprofile');
+        return view('auth.userprofile');
+    }
+
+
+
+    //update profile controller
+    public function profileUpdate(Request $request)
+    {
+        //validation rules
+
+        $request->validate([
+            'name' => 'required|min:4|string|max:255',
+            'email' => 'required|email|string|max:255'
+        ]);
+        $user = Auth::user();
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        $user->save();
+        return back()->with('message', 'Profile Updated');
+    }
+
+
+
+
+
+    //datatable 
+
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = User::all();
+            return Datatables::of($data)->addIndexColumn()
+                ->addColumn("action", '<form action="{{route("users.destroy",$id)}}" method="POST">
+                @csrf
+                @method("DELETE")
+                    <a  href="" title="Edit"  >
+                    <i class="fa fa-edit" style="font-size:20px;color:green "></i>
+                </a>
+                <button type ="submit" title="Delete" style="font-size:24px;color:red;background-color:white;border:0px;">
+                    <i class="fa fa-trash"  style="font-size:24px;color:red;background-color:white;"></i>
+                </button>
+</form>')
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
         }
+        return view('auth.usertable');
+    }
+    public function delete($id){
 
+        User::find($id)->delete();
+        return back()->with('Success',"Data deleted successfully");
 
-
-        //update profile controller
-        public function profileUpdate(Request $request){
-            //validation rules
-    
-            $request->validate([
-                'name' =>'required|min:4|string|max:255',
-                'email'=>'required|email|string|max:255'
-            ]);
-            $user =Auth::user();
-            $user->name = $request['name'];
-            $user->email = $request['email'];
-            $user->save();
-            return back()->with('message','Profile Updated');
-        }
-
+    }
 
 }

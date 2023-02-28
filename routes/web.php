@@ -51,8 +51,8 @@ use App\Http\Controllers\ForgotpasswordController;
              return view('welcome');
          });
 
-        //  Route::get('/resetpassword', function () {
-        //     return view('auth.resetpassword');
+        //  Route::get('/usertable', function () {
+        //     return view('auth.usertable');
         // });
 
 
@@ -94,3 +94,9 @@ use App\Http\Controllers\ForgotpasswordController;
     Route::get('userprofile',[ForgotpasswordController::class,"userprofile"]);
 
     Route::post('userprofile',[ForgotpasswordController::class,"profileUpdate"])->name('update');
+
+
+    Route::get('users', [ForgotpasswordController::class, 'index'])->name('users.index');
+
+    //for soft delete
+    Route::delete('/delete/{id}', [ForgotpasswordController::class,"delete"])->name('users.destroy');
