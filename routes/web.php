@@ -51,12 +51,6 @@ use App\Http\Controllers\ForgotpasswordController;
              return view('welcome');
          });
 
-        //  Route::get('/usertable', function () {
-        //     return view('auth.usertable');
-        // });
-
-
-
         Route::get('register',[RegisterController::class,"show"]);
 
         Route::post('register',[RegisterController::class,"register"]);
@@ -67,7 +61,7 @@ use App\Http\Controllers\ForgotpasswordController;
        
          Route::get('dashboard',[LoginController::class,"dashboard"]);
 
-         Route::get('logout',[LogoutController::class,"perform"]);
+         Route::get('logout',[LogoutController::class,"perform"])->name('logout');
 
          Route::get('forgotpassword',[ForgotpasswordController::class,"forgotPassword"])->name('forgotpassword');
 
@@ -100,3 +94,12 @@ use App\Http\Controllers\ForgotpasswordController;
 
     //for soft delete
     Route::delete('/delete/{id}', [ForgotpasswordController::class,"delete"])->name('users.destroy');
+    //edit 
+
+    Route::get('/edit/{id}', [ForgotpasswordController::class,"edit"])->name('users.edit');
+
+    // Route::get('edit',[ForgotpasswordController::class,"edit"]);
+
+    // Route::post('edit',[ForgotpasswordController::class,"editprofile"])->name('edit');
+
+    

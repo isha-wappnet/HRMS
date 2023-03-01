@@ -4,9 +4,22 @@
 
 @include('layouts.header')
 <style>
-   
+   .cardStyle {
+    width: 500px;
+    border-color: white;
+    background: #fff;
+    padding: 34px 0;
+    border-radius: 4px;
+    margin: 100px 0;
+    box-shadow: 0px 0 2px 0 rgba(0,0,0,0.25);
+  }
 
-   
+   #signupLogo {
+  max-height: 100px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
 .formTitle{
   font-weight: 600;
   margin-top: 20px;
@@ -95,87 +108,67 @@ button[disabled] {
       </div>
       <!-- /.col-lg-12 -->
     </div>
-
-
-    @if (session('error'))
-    <div class="alert alert-danger alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert"
-            aria-hidden="true">×</button>
-        {{ session('error') }}
-    </div>
-@endif
-    @if (session('success'))
-    <div class="alert alert-success alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert"
-            aria-hidden="true">×</button>
-        {{ session('success') }}
-    </div>
-@endif
-<div class="row">
-  <div class="col-sm-12">
-    <div class="white-box">
-
-    <form action="{{route('update')}}" method="post" name="userprofile" id="userprofile">
-       <h2 class="formTitle">
-        Update Profile
-      </h2>
-      @csrf
-      <div class="inputDiv">
-        <label>New name</label>
-        <input type="text" id="name" name="name"  value="{{Auth::user()->name}}">
-        @error('new_name')
-        <span class="text-danger">{{ $message }}</span>
-    @enderror
-      </div>
-
-    <div class="inputDiv">
-      <label >New Email</label>
-      <input type="email" id="email" name="email"   value="{{Auth::user()->email}}">
-      @error('new_email')
-      <span class="text-danger">{{ $message }}</span>
-  @enderror
-    </div>
-      
-   
     
-    <div class="buttonWrapper">
-      <button type="submit" class="submitButton pure-button pure-button-primary">
-        <span>Update Profile</span>
-       
-      </button>
-    </div>
-      
-  </form>
-  </div>
-</div>
+
+<form action="" method=""  name="userprofile" id="userprofile">
+    <h2 class="formTitle">
+     Edit Profile
+   </h2>
+   @csrf
+   <div class="inputDiv">
+     <label>New name</label>
+     <input type="text" id="name" name="name" >
+     {{-- @error('new_name')
+     <span class="text-danger">{{ $message }}</span>
+ @enderror --}}
+   </div>
+
+ <div class="inputDiv">
+   <label >New Email</label>
+   <input type="email" id="email" name="email"   >
+   {{-- @error('new_email')
+   <span class="text-danger">{{ $message }}</span>
+@enderror --}}
+ </div>
+   
+
+ 
+ <div class="buttonWrapper">
+   <button type="submit" class="submitButton pure-button pure-button-primary">
+     <span>Edit Profile</span>
+    
+   </button>
+ </div>
+   
+</form>
 <script>
 
-$('#userprofile').validate({
-    rules: {
-        
-        name: {
-            required: true,
-        },
-        email: {
-            required: true,
+    $('#userprofile').validate({
+        rules: {
+            
+            name: {
+                required: true,
+            },
+            email: {
+                required: true,
+                
+            },
             
         },
-        
-    },
-    messages: {
-      
-        name: {            
-            required: "Please enter new name",
+        messages: {
+          
+            name: {            
+                required: "Please enter new name",
+            },
+            email: {
+                required: "Please enter new email",
+            },
+            
         },
-        email: {
-            required: "Please enter new email",
-        },
-        
-    },
-  })
-
-
-
-</script>
-@include('layouts.footer')
-@endsection
+      })
+    
+    
+    
+    </script>
+    @include('layouts.footer')
+    @endsection

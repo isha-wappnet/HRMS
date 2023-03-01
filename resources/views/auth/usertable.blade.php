@@ -33,16 +33,7 @@
             </div>
             <!-- /.col-lg-12 -->
           </div>
-      {{-- <form action="/search" method="post">
-                   <div class="input-group">
-                <input type="text" class="form-control" name="q"
-                    placeholder="Search users"> <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-            </div>
-        </form> --}}
+      
             <table class="table table-bordered user_datatable">
                 <thead>
                     <tr>
@@ -58,13 +49,7 @@
     </div>
 </div>
 </body>
-{{-- <script>
-// $.ajaxSetup({
-//     headers: {
-//         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//     }
-// });
-</script> --}}
+
 <script type="text/javascript">
     jQuery(function($){
         

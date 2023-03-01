@@ -9,7 +9,13 @@ use App\Models\User;
 class LoginController extends Controller
 {
     public function dashboard(){
+        //dd(Auth::check());
+        if(Auth::check()){
         return view('auth.dashboard');
+        }
+        else{
+            return view('auth.login');
+        }
     }
 
 

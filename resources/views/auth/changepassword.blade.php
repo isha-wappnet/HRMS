@@ -124,7 +124,10 @@ button[disabled] {
         {{ session('success') }}
     </div>
 @endif
-  <div class="cardStyle">
+<div class="row">
+  <div class="col-sm-12">
+    <div class="white-box">
+
     <form action="{{route('change')}}" method="post" name="changepassword" id="changepassword">
        <h2 class="formTitle">
         Change Password

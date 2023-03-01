@@ -268,12 +268,12 @@
                         aria-haspopup="true" aria-expanded="false">Steave Gection <span class="caret"></span></a>
                     <ul class="dropdown-menu animated flipInY">
                         <li><a href="userprofile"><i class="ti-user"></i> My Profile</a></li>
+                        {{-- <li role="separator" class="divider"></li>
+                        <li><a href="changepassword"><i class="ti-user"></i> Change Password</a></li> --}}
                         <li role="separator" class="divider"></li>
-                        <li><a href="changepassword"><i class="ti-user"></i> Change Password</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="login"><i class="fa fa-power-off"></i> Logout</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="users"><i class="ti-user"></i> User Details</a></li>
+                        <li><a href="{{route('logout')}}"><i class="fa fa-power-off"></i> Logout</a></li>
+                        {{-- <li role="separator" class="divider"></li>
+                        <li><a href="users"><i class="ti-user"></i> User Details</a></li> --}}
 
                     </ul>
                 </div>
@@ -356,8 +356,8 @@
                                 class="fa arrow"></span></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="form-basic.html">Basic Forms</a></li>
-                        <li><a href="form-layout.html">Form Layout</a></li>
-                        <li><a href="form-advanced.html">Form Addons</a></li>
+                        <li><a href="userprofile">Form Update Profile</a></li>
+                        <li><a href="changepassword">Form Change Password</a></li>
                         <li><a href="form-material-elements.html">Form Material</a></li>
                         <li><a href="form-upload.html">File Upload</a></li>
                         <li><a href="form-mask.html">Form Mask</a></li>
@@ -432,7 +432,7 @@
                                 class="label label-rouded label-danger pull-right">7</span></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="basic-table.html">Basic Tables</a></li>
-                        <li><a href="data-table.html">Data Table</a></li>
+                        <li><a href="users">Data Table</a></li>
                         <li><a href="bootstrap-tables.html">Bootstrap Tables</a></li>
                         <li><a href="responsive-tables.html">Responsive Tables</a></li>
                         <li><a href="editable-tables.html">Editable Tables</a></li>

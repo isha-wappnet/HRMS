@@ -153,11 +153,11 @@ class ForgotpasswordController extends Controller
                 ->addColumn("action", '<form action="{{route("users.destroy",$id)}}" method="POST">
                 @csrf
                 @method("DELETE")
-                    <a  href="" title="Edit"  >
-                    <i class="fa fa-edit" style="font-size:20px;color:green "></i>
+                    <a  href="{{route("users.edit",$id)}}" title="Edit"  >
+                    <i class="fa fa-edit" style="font: size 5px;px;color:green ">Edit</i>
                 </a>
                 <button type ="submit" title="Delete" style="font-size:24px;color:red;background-color:white;border:0px;">
-                    <i class="fa fa-trash"  style="font-size:24px;color:red;background-color:white;"></i>
+                    <i class="fa fa-trash"  style="font-size:12px;color:red;background-color:white;">Delete</i>
                 </button>
 </form>')
                 ->rawColumns(['action'])
@@ -173,4 +173,24 @@ class ForgotpasswordController extends Controller
 
     }
 
+
+
+
+
+    public function edit($id)
+    {
+
+        return view('auth.edit');
+    }
+
+    public function editprofile(Request $request){
+
+        $request->validate([
+            'name' => 'required|min:4|string|max:255',
+            'email' => 'required|email|string|max:255'
+        ]);
+        $user->update($request->validated());
+    
+        return redirect()->route('edit')->withSuccess('sucess','User updated successfully.');
+    }
 }
