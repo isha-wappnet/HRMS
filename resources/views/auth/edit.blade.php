@@ -110,14 +110,16 @@ button[disabled] {
     </div>
     
 
-<form action="" method=""  name="userprofile" id="userprofile">
+<form action="{{route('edit')}}" method="post"  name="useredit" id="useredit">
     <h2 class="formTitle">
      Edit Profile
    </h2>
    @csrf
+   @method('put')
    <div class="inputDiv">
      <label>New name</label>
-     <input type="text" id="name" name="name" >
+     <input type="hidden" id="id"   value="{{$user->id}}" name="id" >
+     <input type="text" id="name"   value="{{$user->name}}" name="name" >
      {{-- @error('new_name')
      <span class="text-danger">{{ $message }}</span>
  @enderror --}}
@@ -125,7 +127,7 @@ button[disabled] {
 
  <div class="inputDiv">
    <label >New Email</label>
-   <input type="email" id="email" name="email"   >
+   <input type="email" id="email" value="{{$user->email}}" name="email"   >
    {{-- @error('new_email')
    <span class="text-danger">{{ $message }}</span>
 @enderror --}}

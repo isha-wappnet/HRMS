@@ -47,59 +47,63 @@ use App\Http\Controllers\ForgotpasswordController;
 // });
 
 
-         Route::get('/', function () {
-             return view('welcome');
-         });
+Route::get('/', function () {
+    return view('welcome');
+});
+//register--------
+Route::get('register', [RegisterController::class, "show"]);
 
-        Route::get('register',[RegisterController::class,"show"]);
+Route::post('register', [RegisterController::class, "register"]);
 
-        Route::post('register',[RegisterController::class,"register"]);
+//login and logout-------
+Route::get('login', [LoginController::class, "show"]);
 
-        Route::get('login',[LoginController::class,"show"]);
+Route::post('dashboard', [LoginController::class, "login"])->name('user');
 
-        Route::post('dashboard',[LoginController::class,"login"])->name('user');
-       
-         Route::get('dashboard',[LoginController::class,"dashboard"]);
+Route::get('dashboard', [LoginController::class, "dashboard"]);
 
-         Route::get('logout',[LogoutController::class,"perform"])->name('logout');
+Route::get('logout', [LogoutController::class, "perform"])->name('logout');
 
-         Route::get('forgotpassword',[ForgotpasswordController::class,"forgotPassword"])->name('forgotpassword');
 
-         Route::post('forgotPasswordValidate',[ForgotpasswordController::class,'forgotPasswordValidate'])->name('forgotPasswordValidate');
+//forgot password-----------------------------
+Route::get('forgotpassword', [ForgotpasswordController::class, "forgotPassword"])->name('forgotpassword');
 
+Route::post('forgotPasswordValidate', [ForgotpasswordController::class, 'forgotPasswordValidate'])->name('forgotPasswordValidate');
 
 
 
 //route for opening reset page after getting link in mail
+Route::get('/resetpassword/{token}', [ForgotpasswordController::class, "resetpassword"])->name('resetpassword');
 
-         Route::get('/resetpassword/{token}',[ForgotpasswordController::class,"resetpassword"])->name('resetpassword');
-         
 //route to reset password------------------------------------------------
 
-            Route::post('reset',[ForgotpasswordController::class,"submitresetpassword"])->name('submit');
+Route::post('reset', [ForgotpasswordController::class, "submitresetpassword"])->name('submit');
 
-    //route to view change password page
+//route to view change password page------------
 
-    Route::get('changepassword',[ForgotpasswordController::class,"changepassword"]);
-    
-    Route::POST('changepassword',[ForgotpasswordController::class,"submitchangepassword"])->name('change');
-    
+Route::get('changepassword', [ForgotpasswordController::class, "changepassword"]);
 
-    Route::get('userprofile',[ForgotpasswordController::class,"userprofile"]);
+Route::POST('changepassword', [ForgotpasswordController::class, "submitchangepassword"])->name('change');
 
-    Route::post('userprofile',[ForgotpasswordController::class,"profileUpdate"])->name('update');
+//update user profile--------
 
+Route::get('userprofile', [ForgotpasswordController::class, "userprofile"]);
 
-    Route::get('users', [ForgotpasswordController::class, 'index'])->name('users.index');
+Route::post('userprofile', [ForgotpasswordController::class, "profileUpdate"])->name('update');
 
-    //for soft delete
-    Route::delete('/delete/{id}', [ForgotpasswordController::class,"delete"])->name('users.destroy');
-    //edit 
+//data-table-----------
+Route::get('users', [ForgotpasswordController::class, 'index'])->name('users.index');
 
-    Route::get('/edit/{id}', [ForgotpasswordController::class,"edit"])->name('users.edit');
+//for soft delete-------------------
+Route::delete('/delete/{id}', [ForgotpasswordController::class, "delete"])->name('users.destroy');
 
-    // Route::get('edit',[ForgotpasswordController::class,"edit"]);
+//edit ------------------------------
+Route::get('/edit/{id}', [ForgotpasswordController::class, "edit"])->name('users.edit');
 
-    // Route::post('edit',[ForgotpasswordController::class,"editprofile"])->name('edit');
+Route::put('update', [ForgotpasswordController::class, "editprofile"])->name('edit');
 
-    
+Route::get('send-email',function(){
+
+    $data['email']='ishusingh672001@gmail.com';
+    dispatch(new \App\Jobs\TestEmailJob($data));
+});

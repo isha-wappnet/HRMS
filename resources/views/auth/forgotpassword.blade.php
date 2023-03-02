@@ -1,7 +1,11 @@
 @extends('layouts.auth')
 @section('content')
 <title>Forgotpassword page</title>
-<center>
+
+<section id="wrapper" class="login-register">
+    <div class="login-box">
+        <div class="white-box">
+
 <div class="card text-center" style="width: 300px;">
     <div class="card-header h5 text-white bg-primary">Password Reset</div>
     <div class="card-body px-5">
@@ -24,7 +28,7 @@
         <p class="card-text py-2">
             Enter your email address and we'll send you an email with instructions to reset your password.
         </p>
-        <form method="POST" action="{{route('forgotPasswordValidate')}}">
+        <form class="form-horizontal form-material" method="POST" action="{{route('forgotPasswordValidate')}}">
             @csrf
             <input type="email" id="email" name="email" placeholder="Enter registerd email" class="form-control my-3" />
             <br>
@@ -35,6 +39,6 @@
         </form>
         </div>
     </div>
-</div></center>
+</div>
 @endsection
 @include('layouts.footer')

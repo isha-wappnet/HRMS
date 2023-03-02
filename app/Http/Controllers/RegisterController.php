@@ -6,6 +6,8 @@ use App\Models\User;
 
 use Illuminate\Http\Request;
 
+
+
 class RegisterController extends Controller
 {
     //
@@ -22,16 +24,18 @@ class RegisterController extends Controller
     public function register(Request $request) 
     {
         $user = $request->validate([
-            'name' => 'required|unique:users,name',
+            'name' => 'required',
             'email' => 'required|email:rfc,dns|unique:users,email',
             
             'password' => 'required|min:8',
             'cpassword' => 'required|same:password'
         ]);
+
         $user = User::create($request->all());
 
         auth()->login($user);
 
-        return redirect('login')->with('success', "Account successfully registered.");
+        // return redirect('login')->with('success', "Account successfully registered.");
+        return redirect('login')->with('success', 'Success! User created');
     }
 }

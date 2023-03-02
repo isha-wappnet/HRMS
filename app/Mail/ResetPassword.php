@@ -37,3 +37,4 @@ class ResetPassword extends Mailable
         ->view('auth.resetpassword', ['user' => $user]);
     }
 }
+        

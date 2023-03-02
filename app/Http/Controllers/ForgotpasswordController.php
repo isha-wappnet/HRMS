@@ -28,6 +28,7 @@ class ForgotpasswordController extends Controller
             'email' => 'required|email|exists:users',
         ]);
         // dd($valid);
+
         $token = Str::random(64);
 
         DB::table('password_resets')->insert([
@@ -37,6 +38,7 @@ class ForgotpasswordController extends Controller
 
 
         ]);
+        
 
         Mail::send('mailforgot', ['token' => $token], function ($message) use ($req) {
 
@@ -147,6 +149,7 @@ class ForgotpasswordController extends Controller
 
     public function index(Request $request)
     {
+       
         if ($request->ajax()) {
             $data = User::all();
             return Datatables::of($data)->addIndexColumn()
@@ -159,6 +162,7 @@ class ForgotpasswordController extends Controller
                 <button type ="submit" title="Delete" style="font-size:24px;color:red;background-color:white;border:0px;">
                     <i class="fa fa-trash"  style="font-size:12px;color:red;background-color:white;">Delete</i>
                 </button>
+                
 </form>')
                 ->rawColumns(['action'])
                 ->addIndexColumn()
@@ -169,7 +173,7 @@ class ForgotpasswordController extends Controller
     public function delete($id){
 
         User::find($id)->delete();
-        return back()->with('Success',"Data deleted successfully");
+        return back()->with('success',"Data deleted successfully");
 
     }
 
@@ -179,18 +183,21 @@ class ForgotpasswordController extends Controller
 
     public function edit($id)
     {
-
-        return view('auth.edit');
+        $user=User::find($id);
+        return view('auth.edit',compact('user'));
+       
     }
 
     public function editprofile(Request $request){
 
         $request->validate([
+            'id'=>'required',
             'name' => 'required|min:4|string|max:255',
             'email' => 'required|email|string|max:255'
         ]);
-        $user->update($request->validated());
-    
-        return redirect()->route('edit')->withSuccess('sucess','User updated successfully.');
+        $user=User::find($request->id);
+        $user->update($request->only('name','email'));
+    // dd($user);
+            return redirect()->route('users.index')->withSuccess('sucess','User updated successfully.');
     }
 }

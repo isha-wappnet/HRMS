@@ -10,9 +10,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png" />
     {{-- <title>Elite Admin - is a responsive admin template</title> --}}
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('assets/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet" />
     <!-- animation CSS -->
@@ -74,6 +78,10 @@
     <script src="assets/js/custom.min.js"></script>
     <!--Style Switcher -->
     <script src="assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
+
+    @include('sweetalert::alert')
+
 </body>
 
 </html>

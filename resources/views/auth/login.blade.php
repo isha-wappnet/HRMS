@@ -5,6 +5,8 @@
   <section id="wrapper" class="login-register">
   <div class="login-box">
       <div class="white-box">
+
+
         @if (session('error'))
         <div class="alert alert-danger alert-dismissable">
             <button type="button" class="close" data-dismiss="alert"
@@ -19,6 +21,8 @@
             {{ session('success') }}
         </div>
     @endif
+
+    
           <form class="form-horizontal form-material" id="loginforms" method="POST" action="{{route('user')}}">
               @csrf
               <h3 class="box-title m-b-20">Sign In</h3>
@@ -113,5 +117,17 @@
       },
     })
     </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+      <script>
+          $(document).ready(function() {
+              toastr.options.timeOut = 10000;
+              @if (Session::has('error'))
+                  toastr.error('{{ Session::get('error') }}');
+              @elseif(Session::has('success'))
+                  toastr.success('{{ Session::get('success') }}');
+              @endif
+          });
+      </script>
     @endsection
 
