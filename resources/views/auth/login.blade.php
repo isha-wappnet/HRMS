@@ -7,7 +7,7 @@
       <div class="white-box">
 
 
-        @if (session('error'))
+        {{-- @if (session('error'))
         <div class="alert alert-danger alert-dismissable">
             <button type="button" class="close" data-dismiss="alert"
                 aria-hidden="true">×</button>
@@ -20,7 +20,7 @@
                 aria-hidden="true">×</button>
             {{ session('success') }}
         </div>
-    @endif
+    @endif --}}
 
     
           <form class="form-horizontal form-material" id="loginforms" method="POST" action="{{route('user')}}">
@@ -29,21 +29,21 @@
               <div class="form-group">
                   <div class="col-xs-12">
                       <input class="form-control" type="text"id="name" name="email"  placeholder="email" />
-                      @error('email')
+                      {{-- @error('email')
                                     <span class="invalid-feedback text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror --}}
                   </div>
               </div>
               <div class="form-group">
                   <div class="col-xs-12">
                       <input class="form-control" type="password" id="password" name="password" placeholder="Password" />
-                      @error('password')
+                      {{-- @error('password')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                       </span>
-                  @enderror
+                  @enderror --}}
                     </div>
               </div>
               <div class="form-group">

@@ -14,13 +14,7 @@
     box-shadow: 0px 0 2px 0 rgba(0,0,0,0.25);
   }
 
-   #signupLogo {
-  max-height: 100px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-}
-.formTitle{
+  .formTitle{
   font-weight: 600;
   margin-top: 20px;
   color: #2F2D3B;

@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
-
 use App\Http\Controllers\ForgotpasswordController;
 
 /*
@@ -102,8 +101,23 @@ Route::get('/edit/{id}', [ForgotpasswordController::class, "edit"])->name('users
 
 Route::put('update', [ForgotpasswordController::class, "editprofile"])->name('edit');
 
-Route::get('send-email',function(){
 
-    $data['email']='ishusingh672001@gmail.com';
-    dispatch(new \App\Jobs\TestEmailJob($data));
-});
+
+
+
+Route::get('admin',[LoginController::class,"admindashboard"])->middleware('type');
+
+
+
+
+
+
+
+// Route::get('send-email',function(){
+
+
+    
+
+//     $data['email']='ishusingh672001@gmail.com';
+//     dispatch(new \App\Jobs\TestEmailJob($data));
+// });

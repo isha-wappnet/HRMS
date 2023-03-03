@@ -38,7 +38,7 @@ class ForgotpasswordController extends Controller
 
 
         ]);
-        
+
 
         Mail::send('mailforgot', ['token' => $token], function ($message) use ($req) {
 
@@ -59,7 +59,15 @@ class ForgotpasswordController extends Controller
     {
         $request->validate([
             'email' => 'required|email|exists:users',
-            'password' => 'required|min:8',
+            'password' =>   [
+                'required',
+                'string',
+                'min:8',             // must be at least 8 characters in length
+                'regex:/[a-z]/',      // must contain at least one lowercase letter
+                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                'regex:/[0-9]/',      // must contain at least one digit
+                'regex:/[@$!%*#?&]/', // must contain a special character
+            ],
             'cpassword' => 'required|same:password'
         ]);
 
@@ -88,7 +96,7 @@ class ForgotpasswordController extends Controller
 
         return view('auth.changepassword');
     }
-    //change password function
+    //change password function------------------------------------------------------------
 
     public function submitchangepassword(Request $request)
     {
@@ -96,7 +104,15 @@ class ForgotpasswordController extends Controller
 
         $request->validate([
             'currentpassword' => 'required',
-            'new_password' => 'required',
+            'new_password' => [
+                'required',
+                'string',
+                'min:8',             // must be at least 8 characters in length
+                'regex:/[a-z]/',      // must contain at least one lowercase letter
+                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                'regex:/[0-9]/',      // must contain at least one digit
+                'regex:/[@$!%*#?&]/', // must contain a special character
+            ],
         ]);
 
 
@@ -114,9 +130,6 @@ class ForgotpasswordController extends Controller
         return redirect('login')->with('success', 'Password Updated Successfully');
     }
 
-
-
-
     public function userprofile()
     {
 
@@ -125,7 +138,9 @@ class ForgotpasswordController extends Controller
 
 
 
-    //update profile controller
+    //update profile controller------------------------------------------------------------------
+
+
     public function profileUpdate(Request $request)
     {
         //validation rules
@@ -145,21 +160,24 @@ class ForgotpasswordController extends Controller
 
 
 
-    //datatable 
+    //Delete form datatable----------------------------------------------------------------------
+
+
 
     public function index(Request $request)
     {
-       
+
         if ($request->ajax()) {
             $data = User::all();
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn("action", '<form action="{{route("users.destroy",$id)}}" method="POST">
                 @csrf
                 @method("DELETE")
+                
                     <a  href="{{route("users.edit",$id)}}" title="Edit"  >
                     <i class="fa fa-edit" style="font: size 5px;px;color:green ">Edit</i>
                 </a>
-                <button type ="submit" title="Delete" style="font-size:24px;color:red;background-color:white;border:0px;">
+                <button type ="submit" id="btn" title="Delete" style="font-size:24px;color:red;background-color:white;border:0px;">
                     <i class="fa fa-trash"  style="font-size:12px;color:red;background-color:white;">Delete</i>
                 </button>
                 
@@ -170,34 +188,36 @@ class ForgotpasswordController extends Controller
         }
         return view('auth.usertable');
     }
-    public function delete($id){
+    public function delete($id)
+    {
 
         User::find($id)->delete();
-        return back()->with('success',"Data deleted successfully");
-
+        return back()->with('success', "Data deleted successfully");
     }
 
 
+
+    //Edit User from Data-table-------------------------------------
 
 
 
     public function edit($id)
     {
-        $user=User::find($id);
-        return view('auth.edit',compact('user'));
-       
+        $user = User::find($id);
+        return view('auth.edit', compact('user'));
     }
 
-    public function editprofile(Request $request){
+    public function editprofile(Request $request)
+    {
 
         $request->validate([
-            'id'=>'required',
+            'id' => 'required',
             'name' => 'required|min:4|string|max:255',
             'email' => 'required|email|string|max:255'
         ]);
-        $user=User::find($request->id);
-        $user->update($request->only('name','email'));
-    // dd($user);
-            return redirect()->route('users.index')->withSuccess('sucess','User updated successfully.');
+        $user = User::find($request->id);
+        $user->update($request->only('name', 'email'));
+        // dd($user);
+        return redirect()->route('users.index')->withSuccess('sucess', 'User updated successfully.');
     }
 }

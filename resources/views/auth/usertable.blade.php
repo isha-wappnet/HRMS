@@ -13,8 +13,7 @@
     </head>
 
     <body>
-        
-
+        <div>
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row bg-title">
@@ -35,18 +34,18 @@
                 </div>
 
                 <table class="table table-bordered user_datatable">
-                  @if (session('error'))
-            <div class="alert alert-danger alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                {{ session('error') }}
-            </div>
-        @endif
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                {{ session('success') }}
-            </div>
-        @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -60,8 +59,9 @@
             </div>
         </div>
         </div>
+    
     </body>
-
+   
     <script type="text/javascript">
         jQuery(function($) {
 
@@ -91,6 +91,31 @@
             });
         })
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+        $('.show-alert-delete-box').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: "Are you sure you want to delete this record?",
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                type: "warning",
+                buttons: ["Cancel", "Yes!"],
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+
 
     </html>
     @include('layouts.footer')
